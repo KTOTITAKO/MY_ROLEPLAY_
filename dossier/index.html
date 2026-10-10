@@ -1,0 +1,981 @@
+<title>The Artemiy Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Prata&display=swap">
+<style>
+/* Layout: a secret-police case file. A Guards-cloth hero holds the unfinished canvas; below it the contents of ten books;
+   then the open book in one reading column, with the painter's ledger pinned beside the commission on wide screens. */
+:root{
+  --bg:#dde2dc;          /* blue-grey Russian chancellery paper */
+  --sheet:#eaede7;
+  --ink:#231d18;         /* iron-gall ink */
+  --ink-2:#5a5249;
+  --rule:#b6bcb3;
+  --gold:#83601f;        /* bullion */
+  --andrew:#2d628c;      /* St Andrew's riband */
+  --andrew-tint:rgba(45,98,140,.13);
+  --seal:#952a1f;        /* sealing wax */
+  --seal-ink:#f6eee2;
+  --cloth:#1b372c;       /* Guards coat */
+  --on-cloth:#efe7d2;
+  --on-cloth-2:#c5bca3;
+  --laid:rgba(35,29,24,.04);
+  --chip-on-bg:#231d18;
+  --chip-on-fg:#eaede7;
+  --ok:#3c6b3f;
+  --warn:#8a5a12;
+  --f-display:"Prata","Bodoni 72","Didot",Georgia,serif;
+  --f-body:"Old Standard TT","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --f-hand:"Marck Script","Snell Roundhand","Apple Chancery",cursive;
+  --s--1:.82rem; --s-0:1rem; --s-1:1.18rem; --s-2:1.45rem; --s-3:1.95rem; --s-4:clamp(2.3rem,6vw,3.6rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1915; --sheet:#14251e; --ink:#ebe2ca; --ink-2:#ada48c; --rule:#2b4136; --gold:#d4b066;
+    --andrew:#8ebbdf; --andrew-tint:rgba(142,187,223,.15); --seal:#c4473a; --seal-ink:#fbf2e6;
+    --cloth:#08120e; --on-cloth:#efe7d2; --on-cloth-2:#bdb49b; --laid:rgba(235,226,202,.025);
+    --chip-on-bg:#ebe2ca; --chip-on-fg:#0e1915; --ok:#86b88a; --warn:#d9a54a; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1915; --sheet:#14251e; --ink:#ebe2ca; --ink-2:#ada48c; --rule:#2b4136; --gold:#d4b066;
+  --andrew:#8ebbdf; --andrew-tint:rgba(142,187,223,.15); --seal:#c4473a; --seal-ink:#fbf2e6;
+  --cloth:#08120e; --on-cloth:#efe7d2; --on-cloth-2:#bdb49b; --laid:rgba(235,226,202,.025);
+  --chip-on-bg:#ebe2ca; --chip-on-fg:#0e1915; --ok:#86b88a; --warn:#d9a54a; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background-color:var(--bg); color:var(--ink);
+  background-image:
+    repeating-linear-gradient(0deg,var(--laid) 0 1px,transparent 1px 6px),
+    repeating-linear-gradient(90deg,var(--laid) 0 1px,transparent 1px 92px);
+  font-family:var(--f-body); font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--f-display); font-weight:400; text-wrap:balance; margin:0; line-height:1.15}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--andrew); outline-offset:2px}
+.wrap{max-width:1180px; margin-inline:auto; padding-inline:clamp(16px,4vw,40px)}
+.sc{font-variant:small-caps; letter-spacing:.06em}
+.hand{font-family:var(--f-hand)}
+.muted{color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* ---------- Hero ---------- */
+.cloth{
+  background:var(--cloth); color:var(--on-cloth);
+  border-bottom:3px double var(--gold);
+}
+.hero{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr); gap:clamp(24px,5vw,64px); align-items:center; padding-block:clamp(28px,5vw,56px)}
+.eyebrow{font-size:var(--s--1); color:var(--on-cloth-2); letter-spacing:.08em}
+.hero h1{font-size:var(--s-4); margin-top:14px; color:var(--on-cloth)}
+.hero .sub{font-style:italic; color:var(--on-cloth-2); margin-top:8px; font-size:var(--s-1)}
+.stamp{display:inline-flex; flex-wrap:wrap; gap:6px 14px; margin-top:20px; padding:8px 12px; border:1px solid color-mix(in srgb,var(--gold) 60%,transparent); font-size:var(--s--1); color:var(--on-cloth)}
+.stamp b{color:var(--gold); font-weight:400}
+.lead{margin-top:18px; max-width:62ch; color:var(--on-cloth)}
+.codex{margin-top:22px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 22px; padding:0; list-style:none; max-width:62ch}
+.codex li{font-size:var(--s--1); color:var(--on-cloth-2); padding-top:8px; border-top:1px solid color-mix(in srgb,var(--on-cloth) 18%,transparent)}
+.codex li strong{display:block; color:var(--on-cloth); font-weight:700; font-size:.9rem}
+.frame{margin:0; justify-self:center; max-width:380px; width:100%}
+.frame .gilt{
+  padding:10px; background:linear-gradient(135deg,#7a5a1c,#e6c97a 22%,#8d6a26 45%,#f0d995 62%,#7a5a1c 85%);
+  box-shadow:0 18px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(0,0,0,.35);
+}
+.frame img{display:block; width:100%; height:auto; aspect-ratio:448/608; box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.frame figcaption{margin-top:12px; font-family:var(--f-hand); font-size:1.25rem; color:var(--on-cloth-2); text-align:center}
+
+/* ---------- Contents ---------- */
+section{padding-block:clamp(36px,6vw,64px) 0}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 24px; border-bottom:1px solid var(--rule); padding-bottom:10px}
+.sec-head h2{font-size:var(--s-3)}
+.sec-head p{max-width:60ch; color:var(--ink-2); font-size:.95rem}
+.books{margin-top:20px; display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:12px}
+.book{position:relative; padding:14px 14px 14px 16px; background:var(--sheet); border:1px solid var(--rule); min-height:128px; display:flex; flex-direction:column; gap:6px}
+.book .rn{font-family:var(--f-display); font-size:var(--s-2); line-height:1; color:var(--gold)}
+.book h3{font-size:1.05rem}
+.book p{font-size:.84rem; color:var(--ink-2); line-height:1.4}
+.book .q{margin-top:auto; font-size:.78rem; letter-spacing:.06em; color:var(--ink-2)}
+.book.open{border-color:var(--andrew); box-shadow:inset 0 0 0 1px var(--andrew)}
+.book.open .q{color:var(--andrew)}
+.wax{position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--seal) 70%,#fff) 0,var(--seal) 40%,color-mix(in srgb,var(--seal) 75%,#000) 100%);
+  color:var(--seal-ink); display:grid; place-items:center; font-family:var(--f-display); font-size:.62rem;
+  box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.book.open .wax{background:none; box-shadow:none; color:var(--andrew); border:1px dashed var(--andrew); font-size:.58rem}
+.tally{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:16px; font-size:.9rem; color:var(--ink-2)}
+.tally b{font-family:var(--f-display); font-weight:400; color:var(--ink); font-size:1.15rem}
+
+/* ---------- Book head ---------- */
+.book-head{display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 24px; align-items:end; padding-bottom:18px; border-bottom:3px double var(--rule)}
+.book-head .big{font-family:var(--f-display); font-size:clamp(4rem,12vw,7.5rem); line-height:.8; color:var(--gold)}
+.book-head h2{font-size:var(--s-4)}
+.book-head p{color:var(--ink-2); max-width:62ch; margin-top:8px}
+.parts{display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:12px; font-size:.86rem}
+.parts a{color:var(--andrew); text-decoration:none; border-bottom:1px solid transparent}
+.parts a:hover{border-bottom-color:var(--andrew)}
+
+.part{padding-top:clamp(32px,5vw,52px)}
+.part-title{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+.part-title .letter{font-family:var(--f-display); font-size:var(--s-2); color:var(--seal)}
+.part-title h3{font-size:var(--s-3)}
+.part-intro{margin-top:10px; max-width:66ch; color:var(--ink-2)}
+.note{margin-top:12px; font-family:var(--f-hand); font-size:1.2rem; color:var(--andrew)}
+
+/* ---------- Commission ---------- */
+.commission{display:grid; grid-template-columns:minmax(0,1fr) 330px; gap:clamp(20px,3vw,40px); margin-top:22px; align-items:start}
+.stage{padding-block:22px; border-top:1px solid var(--rule)}
+.stage:first-child{border-top:0; padding-top:0}
+.stage-h{display:flex; gap:12px; align-items:baseline; flex-wrap:wrap}
+.stage-h .n{font-family:var(--f-display); color:var(--gold); font-size:1.1rem}
+.stage-h h4{font-size:var(--s-1)}
+.stage-h .opt{font-size:.82rem; color:var(--ink-2)}
+
+.painters{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; margin-top:14px}
+.painter{all:unset; box-sizing:border-box; cursor:pointer; display:flex; flex-direction:column; gap:7px; padding:14px; background:var(--sheet); border:1px solid var(--rule); position:relative}
+.painter:focus-visible{outline:2px solid var(--andrew); outline-offset:2px}
+.painter:hover{border-color:var(--ink-2)}
+.painter .pn{font-family:var(--f-display); font-size:1.08rem; line-height:1.2; padding-right:56px}
+.painter .pd{font-size:.78rem; color:var(--ink-2); letter-spacing:.04em}
+.painter .pl{font-size:.86rem; line-height:1.42}
+.painter .pl i{color:var(--ink-2)}
+.painter .pe{font-size:.84rem; line-height:1.4; padding-top:7px; border-top:1px dotted var(--rule)}
+.painter .pe b{color:var(--andrew); font-weight:700}
+.painter .tag{position:absolute; top:12px; right:12px; font-size:.66rem; letter-spacing:.1em; padding:2px 6px; border:1px solid var(--seal); color:var(--seal); transform:rotate(4deg); opacity:0}
+.painter[aria-pressed="true"]{border-color:var(--andrew); background:linear-gradient(var(--andrew-tint),var(--andrew-tint)),var(--sheet); box-shadow:inset 0 0 0 1px var(--andrew)}
+.painter[aria-pressed="true"] .tag{opacity:1}
+
+.sheetbox{margin-top:14px; max-width:640px}
+.sheet-img{position:relative; border:8px solid var(--sheet); outline:1px solid var(--rule); background:var(--sheet)}
+.sheet-img img{display:block; width:100%; height:auto; aspect-ratio:640/416}
+.hot{position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr)}
+.hot button{all:unset; cursor:pointer; position:relative; box-sizing:border-box; border:2px solid transparent}
+.hot button:hover{border-color:color-mix(in srgb,var(--gold) 70%,transparent)}
+.hot button:focus-visible{border-color:var(--andrew)}
+.hot button[aria-pressed="true"]{border-color:var(--gold); box-shadow:inset 0 0 0 2px rgba(0,0,0,.25)}
+.hot button span{position:absolute; left:6px; bottom:6px; font-family:var(--f-display); font-size:.78rem; padding:1px 7px; background:rgba(20,16,12,.72); color:#f2e9d4}
+.hot button[aria-pressed="true"] span{background:#b8902f; color:#1a140c}
+.sheet-cap{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:8px; font-size:.8rem; color:var(--ink-2)}
+.sheet-cap a{color:var(--andrew)}
+.bases{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:8px; margin-top:12px}
+.base{all:unset; box-sizing:border-box; cursor:pointer; padding:9px 11px; border:1px solid var(--rule); background:var(--sheet); font-size:.84rem; line-height:1.35}
+.base b{font-family:var(--f-display); font-weight:400; display:block; font-size:.95rem}
+.base:focus-visible{outline:2px solid var(--andrew); outline-offset:2px}
+.base[aria-pressed="true"]{border-color:var(--gold); box-shadow:inset 0 0 0 1px var(--gold)}
+
+fieldset.grp{border:0; padding:0; margin:18px 0 0; min-width:0}
+fieldset.grp legend{font-family:var(--f-display); font-size:1.05rem; padding:0; margin-bottom:6px; color:var(--ink)}
+.grp-note{font-size:.8rem; color:var(--ink-2); font-style:italic; margin:-2px 0 8px}
+.prow{display:grid; grid-template-columns:132px minmax(0,1fr); gap:6px 14px; padding-block:7px; border-top:1px dotted var(--rule)}
+.prow > .pk{font-size:.8rem; letter-spacing:.07em; font-variant:small-caps; color:var(--ink-2); padding-top:5px}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{all:unset; box-sizing:border-box; cursor:pointer; padding:4px 10px; border:1px solid var(--rule); background:var(--sheet); font-size:.86rem; line-height:1.35; border-radius:2px}
+.chip:hover{border-color:var(--ink-2)}
+.chip:focus-visible{outline:2px solid var(--andrew); outline-offset:1px}
+.chip[aria-pressed="true"]{background:var(--chip-on-bg); color:var(--chip-on-fg); border-color:var(--chip-on-bg)}
+.chip .pts{font-family:var(--f-display); color:var(--gold); margin-left:4px}
+.chip[aria-pressed="true"] .pts{color:inherit}
+
+textarea,input[type="text"]{width:100%; font:inherit; font-size:.98rem; color:var(--ink); background:var(--sheet); border:1px solid var(--rule); border-radius:0; padding:10px 12px; line-height:1.5; resize:vertical}
+textarea:focus,input[type="text"]:focus{outline:2px solid var(--andrew); outline-offset:0; border-color:transparent}
+
+/* ledger */
+.ledger{position:sticky; top:calc(env(safe-area-inset-top,0px) + 14px); background:var(--sheet); border:1px solid var(--rule); padding:14px}
+.ledger h4{font-size:1.1rem}
+.ledger .mini{display:grid; grid-template-columns:86px minmax(0,1fr); gap:12px; align-items:center; margin-top:10px}
+.ledger .mini img{width:86px; height:auto; aspect-ratio:448/608; display:block; border:3px solid #a8822f}
+.meter{height:8px; background:color-mix(in srgb,var(--rule) 60%,transparent); position:relative; margin-top:6px}
+.meter i{position:absolute; inset:0 auto 0 0; background:var(--gold); width:0; transition:width .3s}
+.meter-l{display:flex; justify-content:space-between; font-size:.78rem; color:var(--ink-2); margin-top:4px}
+.verdict{font-family:var(--f-hand); font-size:1.15rem; line-height:1.3; color:var(--andrew); margin-top:10px}
+.ledger-list{margin-top:12px; max-height:46vh; overflow:auto; border-top:1px dotted var(--rule); padding-top:8px; font-size:.84rem}
+.ledger-list dl{margin:0; display:grid; grid-template-columns:auto minmax(0,1fr); gap:2px 10px}
+.ledger-list dt{color:var(--ink-2); font-variant:small-caps; letter-spacing:.05em}
+.ledger-list dd{margin:0; font-family:var(--f-hand); font-size:1.08rem; line-height:1.25}
+.ledger-list .empty{color:var(--ink-2); font-style:italic}
+
+/* ---------- Physician ---------- */
+.measures{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; margin-top:20px}
+.measure{background:var(--sheet); border:1px solid var(--rule); padding:14px}
+.measure .ml{font-size:.8rem; letter-spacing:.07em; font-variant:small-caps; color:var(--ink-2)}
+.measure .mv{font-family:var(--f-display); font-size:1.5rem; margin-top:4px; line-height:1.2}
+.measure .mc{font-size:.84rem; color:var(--ink-2)}
+input[type="range"]{width:100%; margin-top:10px; accent-color:var(--andrew)}
+.scale-l{display:flex; justify-content:space-between; font-size:.72rem; color:var(--ink-2)}
+
+.exam{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:clamp(18px,3vw,36px); margin-top:22px; align-items:start}
+.attrs{display:flex; flex-direction:column}
+.attr{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; padding-block:9px; border-top:1px dotted var(--rule)}
+.attr:first-child{border-top:0}
+.attr .an{font-family:var(--f-display); font-size:1rem}
+.attr .ad{font-size:.8rem; color:var(--ink-2); line-height:1.35; grid-column:1}
+.attr .ctl{grid-row:1 / span 2; grid-column:2; display:flex; align-items:center; gap:8px}
+.step{all:unset; cursor:pointer; width:28px; height:28px; display:grid; place-items:center; border:1px solid var(--rule); background:var(--sheet); font-size:1.1rem; line-height:1}
+.step:hover{border-color:var(--ink)}
+.step:focus-visible{outline:2px solid var(--andrew); outline-offset:1px}
+.step[disabled]{opacity:.35; cursor:not-allowed}
+.pips{display:flex; gap:2px}
+.pips i{width:7px; height:16px; border:1px solid var(--rule); display:block}
+.pips i.on{background:var(--ink); border-color:var(--ink)}
+.pips i.on.t2{background:var(--andrew); border-color:var(--andrew)}
+.pips i.on.t3{background:var(--gold); border-color:var(--gold)}
+.lvl{font-family:var(--f-display); width:1.6em; text-align:right}
+
+.chart-card{position:sticky; top:calc(env(safe-area-inset-top,0px) + 14px); background:var(--sheet); border:1px solid var(--rule); padding:14px}
+.pool{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.pool .big{font-family:var(--f-display); font-size:2.6rem; line-height:1}
+.pool .big.neg{color:var(--seal)}
+.pool small{color:var(--ink-2); font-size:.82rem}
+.costs{font-size:.78rem; color:var(--ink-2); margin-top:6px; line-height:1.4}
+.costs i{display:inline-block; width:9px; height:9px; margin:0 3px -1px 6px}
+.radar{width:100%; height:auto; margin-top:6px; display:block}
+.radar .ring{fill:none; stroke:var(--rule); stroke-width:1}
+.radar .spoke{stroke:var(--rule); stroke-width:1}
+.radar .area{fill:var(--andrew-tint); stroke:var(--andrew); stroke-width:2; stroke-linejoin:round}
+.radar .dot{fill:var(--andrew)}
+.radar text{fill:var(--ink-2); font-family:var(--f-body); font-size:12px}
+.radar text.v{fill:var(--ink); font-family:var(--f-display); font-size:11px}
+
+.affl{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; margin-top:14px}
+.ail{all:unset; box-sizing:border-box; cursor:pointer; padding:12px; background:var(--sheet); border:1px solid var(--rule); display:flex; flex-direction:column; gap:5px}
+.ail:focus-visible{outline:2px solid var(--andrew); outline-offset:2px}
+.ail .at{display:flex; justify-content:space-between; gap:8px; align-items:baseline}
+.ail .at b{font-family:var(--f-display); font-weight:400; font-size:.98rem}
+.ail .at span{font-family:var(--f-display); color:var(--gold); white-space:nowrap}
+.ail p{font-size:.8rem; color:var(--ink-2); line-height:1.38}
+.ail[aria-pressed="true"]{border-color:var(--seal); box-shadow:inset 0 0 0 1px var(--seal)}
+.ail[aria-pressed="true"] .at span{color:var(--seal)}
+.ail[aria-disabled="true"]{opacity:.45; cursor:not-allowed}
+.flash{min-height:1.4em; font-size:.85rem; color:var(--seal); margin-top:8px}
+
+/* ---------- Questions ---------- */
+.qs{display:flex; flex-direction:column; gap:14px; margin-top:20px}
+.qcard{display:grid; grid-template-columns:72px minmax(0,1fr); gap:6px 18px; background:var(--sheet); border:1px solid var(--rule); padding:16px}
+.qcard .qn{font-family:var(--f-display); font-size:2rem; line-height:1; color:var(--gold); grid-row:1 / span 3}
+.qcard .qn small{display:block; font-size:.7rem; color:var(--ink-2); letter-spacing:.1em; margin-top:6px}
+.qcard h4{font-size:1.15rem}
+.qcard .qp{font-size:.95rem; color:var(--ink-2); max-width:68ch}
+.qcard textarea{margin-top:6px; min-height:110px}
+.qmeta{display:flex; justify-content:space-between; font-size:.75rem; color:var(--ink-2); margin-top:4px}
+.qcard.done .qn{color:var(--andrew)}
+
+/* ---------- Seal ---------- */
+.sealbox{margin-top:20px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:18px 28px; align-items:center; background:var(--sheet); border:1px solid var(--rule); padding:18px}
+.checks{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px 18px; list-style:none; padding:0; margin:0}
+.checks li{font-size:.86rem; color:var(--ink-2)}
+.checks li b{display:block; font-family:var(--f-display); font-weight:400; font-size:1.2rem; color:var(--ink)}
+.checks li.ok b{color:var(--ok)}
+.seal-actions{display:flex; flex-direction:column; gap:10px; align-items:stretch; min-width:220px}
+.btn-seal{all:unset; box-sizing:border-box; cursor:pointer; text-align:center; padding:12px 18px; background:var(--seal); color:var(--seal-ink); font-family:var(--f-display); font-size:1.05rem; letter-spacing:.03em; box-shadow:0 2px 0 color-mix(in srgb,var(--seal) 60%,#000)}
+.btn-seal:hover{filter:brightness(1.08)}
+.btn-seal:focus-visible{outline:2px solid var(--andrew); outline-offset:2px}
+.btn-quiet{all:unset; box-sizing:border-box; cursor:pointer; text-align:center; padding:9px 14px; border:1px solid var(--rule); font-size:.9rem}
+.btn-quiet:hover{border-color:var(--ink)}
+.btn-quiet:focus-visible{outline:2px solid var(--andrew); outline-offset:2px}
+.status{font-size:.82rem; color:var(--ink-2); text-align:center}
+.status.ok{color:var(--ok)} .status.warn{color:var(--warn)}
+#exportBox{margin-top:12px}
+#exportBox textarea{min-height:200px; font-size:.8rem}
+.coda{margin-top:28px; padding-block:22px 10px; border-top:3px double var(--rule); display:flex; gap:12px 24px; flex-wrap:wrap; justify-content:space-between; color:var(--ink-2); font-size:.9rem}
+.coda .hand{font-size:1.35rem; color:var(--andrew)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .commission{grid-template-columns:minmax(0,1fr)}
+  .ledger{position:static}
+  .exam{grid-template-columns:minmax(0,1fr)}
+  .chart-card{position:static}
+}
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .frame{max-width:300px}
+  .codex{grid-template-columns:minmax(0,1fr)}
+  .prow{grid-template-columns:minmax(0,1fr)}
+  .prow > .pk{padding-top:0}
+  .sealbox{grid-template-columns:minmax(0,1fr)}
+  .qcard{grid-template-columns:minmax(0,1fr)}
+  .qcard .qn{grid-row:auto; font-size:1.5rem}
+  .qcard .qn small{display:inline; margin-left:8px}
+  .book-head{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){ .meter i{transition:none} }
+</style>
+
+<header class="cloth">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow sc">Тайная экспедиція Сената · Secret Expedition of the Governing Senate · Case file № 1801/III</p>
+      <h1>Artemiy Pavlovich</h1>
+      <p class="sub">Grand Duke of Russia. Son of the reigning Emperor. Subject of this file.</p>
+      <div class="stamp"><span><b>Place</b> St Michael's Castle, St Petersburg</span><span><b>Date</b> 11 March 1801 (O.S.) · 23 March (N.S.)</span><span><b>Hour</b> evening</span></div>
+      <p class="lead">Your father, Emperor Paul I, has gone up to his bedchamber in the new castle he believes no one can storm. Count Pahlen, Military Governor of the capital, holds the keys to the city. Across town, dozens of Guards officers are drinking champagne at General Talyzin's quarters with the Zubov brothers and General Bennigsen. Before this night plays out, the Expedition needs to know exactly who you are.</p>
+      <ul class="codex">
+        <li><strong>Merciless</strong>You can die. A coup, a fever, a bullet, a cup of wine. Nothing protects you but your choices.</li>
+        <li><strong>History holds until you break it</strong>Events run as they really did, until your actions change them.</li>
+        <li><strong>Your words outrank your numbers</strong>Where your written answers contradict your points, the words win.</li>
+        <li><strong>One book per message</strong>Ten books, 113 questions. Answers save to the Chancellery as you write.</li>
+      </ul>
+    </div>
+    <figure class="frame">
+      <div class="gilt"><img src="img/canvas_unfinished.webp" alt="An unfinished oil portrait: the green Guards uniform, gold epaulettes and blue sash of St Andrew are fully painted, but the face is only a brown underpainting sketch." width="448" height="608"></div>
+      <figcaption>The canvas waits for a face.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="contents" aria-labelledby="contents-h">
+    <div class="sec-head">
+      <h2 id="contents-h">Ten books</h2>
+      <p>One book opens with each message. Four of the ten are given to ideology, because in this game your beliefs are what you govern with.</p>
+    </div>
+    <div class="books" id="books"></div>
+    <div class="tally" id="tally"></div>
+  </section>
+
+  <section id="book1" aria-labelledby="b1-h">
+    <div class="book-head">
+      <div class="big" aria-hidden="true">I</div>
+      <div>
+        <h2 id="b1-h">The Sitter</h2>
+        <p>A painter, a physician and a mirror. Commission the state portrait that will be engraved and sent to every embassy in Europe. Then let the court surgeon examine you. Then answer ten questions about the body you live in.</p>
+        <nav class="parts" aria-label="Parts of Book I">
+          <a href="#partA">A · The commission</a><a href="#partB">B · The physician's ledger</a><a href="#partC">C · Ten questions</a><a href="#partD">D · Seal the book</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- A. Commission -->
+    <div class="part" id="partA">
+      <div class="part-title"><span class="letter">A</span><h3>The commission</h3></div>
+      <p class="part-intro">Choose a painter, a sitter's type and every feature of your face. Your choices go to the painter, and the finished oil portrait comes back in my next message, painted by an image model in the manner of the state portrait you showed me. Expect sittings: a first likeness, your corrections, then the final canvas.</p>
+
+      <div class="commission">
+        <div>
+          <div class="stage">
+            <div class="stage-h"><span class="n">1</span><h4>Choose the painter</h4><span class="opt">Every one of them is in or near Petersburg this spring.</span></div>
+            <div class="painters" id="painters"></div>
+          </div>
+
+          <div class="stage">
+            <div class="stage-h"><span class="n">2</span><h4>Pick a type from the Academy study sheet</h4><span class="opt">A starting face. Everything below refines it.</span></div>
+            <div class="sheetbox">
+              <div class="sheet-img">
+                <img src="img/study_sheet.webp" alt="An oil study sheet of six young men's heads in two rows of three, each marked with the number 23." width="640" height="416">
+                <div class="hot" id="hot"></div>
+              </div>
+              <div class="sheet-cap"><span>Six heads painted for this file. The painter marked each sitter's age.</span><a href="https://img.recraft.ai/dXCN0JXoPF5fkvH6FP0xdqDGjbmjkktqhfX1cUSwOeg/rs:fit:1280:832:0/raw:1/plain/abs://external/images/0394e918-2a9f-4e8a-93d9-e4a5d49ca969" target="_blank" rel="noopener">Open the sheet at full size</a></div>
+              <div class="bases" id="bases"></div>
+            </div>
+          </div>
+
+          <div class="stage">
+            <div class="stage-h"><span class="n">3</span><h4>The sitting</h4><span class="opt"><span id="featCount">43</span> features. Leave any blank and the painter decides.</span></div>
+            <div id="face"></div>
+          </div>
+
+          <div class="stage">
+            <div class="stage-h"><span class="n">4</span><h4>Anything else the painter must see</h4></div>
+            <label class="muted" for="painterNotes" style="display:block;font-size:.88rem;margin:10px 0 6px">A habit of the mouth, a ring, the way the light should fall. Write it here in your own words.</label>
+            <textarea id="painterNotes" rows="4" placeholder="For example: a thin white scar through the left eyebrow, and the eyes should look past the viewer toward something he does not want to see."></textarea>
+          </div>
+        </div>
+
+        <aside class="ledger" aria-label="Painter's ledger">
+          <h4>The painter's ledger</h4>
+          <div class="mini">
+            <img src="img/canvas_unfinished.webp" alt="" width="86" height="117">
+            <div>
+              <div class="sc" style="font-size:.78rem;color:var(--ink-2)">Likeness given</div>
+              <div class="meter"><i id="likeBar"></i></div>
+              <div class="meter-l"><span id="likeTxt" class="num">0 of 43</span><span id="likePct" class="num">0%</span></div>
+            </div>
+          </div>
+          <p class="verdict" id="verdict">No painter engaged yet.</p>
+          <div class="ledger-list" id="ledgerList"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- B. Physician -->
+    <div class="part" id="partB">
+      <div class="part-title"><span class="letter">B</span><h3>The physician's ledger</h3></div>
+      <p class="part-intro">Dr James Wylie, the Scottish surgeon your father raised to court rank after he saved Count Kutaisov, measures you in arshins and vershoks, weighs you in poods, and keeps a confidential ledger. Every attribute starts at 3. You have 30 points to raise them, plus whatever your afflictions pay you. Higher levels cost more.</p>
+
+      <div class="measures">
+        <div class="measure">
+          <div class="ml">Height</div>
+          <div class="mv num" id="hVal">2 arshins 8 vershoks</div>
+          <div class="mc num" id="hCm">≈ 177.8 cm</div>
+          <label for="height" class="muted" style="font-size:.78rem;display:block;margin-top:8px">Your father stands about 2 arshins 5½ vershoks. Grenadiers of the Guard are chosen tall.</label>
+          <input type="range" id="height" min="3" max="15" step="0.5" value="8">
+          <div class="scale-l"><span>155 cm</span><span>209 cm</span></div>
+        </div>
+        <div class="measure">
+          <div class="ml">Weight</div>
+          <div class="mv num" id="wVal">4 poods 15 funts</div>
+          <div class="mc num" id="wCm">≈ 71.7 kg</div>
+          <label for="weight" class="muted" style="font-size:.78rem;display:block;margin-top:8px">One pood is forty funts, about 16.4 kg.</label>
+          <input type="range" id="weight" min="135" max="290" step="1" value="175">
+          <div class="scale-l"><span>55 kg</span><span>119 kg</span></div>
+        </div>
+        <div class="measure">
+          <div class="ml">Frame</div>
+          <div class="chips" id="build" style="margin-top:8px"></div>
+          <div class="ml" style="margin-top:14px">Hand</div>
+          <div class="chips" id="hand" style="margin-top:8px"></div>
+        </div>
+      </div>
+
+      <div class="exam">
+        <div>
+          <div class="stage-h" style="margin-top:4px"><h4>Attributes of the body</h4><span class="opt">1 to 10. Lowering below 3 refunds a point per level.</span></div>
+          <div class="attrs" id="attrs" style="margin-top:8px"></div>
+        </div>
+        <div class="chart-card">
+          <div class="pool"><span class="big num" id="poolLeft">30</span><div><div>points left</div><small id="poolOf">of 30 (no afflictions)</small></div></div>
+          <p class="costs">Step cost<i style="background:var(--ink)"></i>to 6: 1<i style="background:var(--andrew)"></i>7–8: 2<i style="background:var(--gold)"></i>9–10: 3</p>
+          <svg class="radar" id="radar" viewBox="-70 10 500 350" role="img" aria-label="Radar chart of your fourteen body attributes"></svg>
+          <p class="note" style="font-size:1.05rem;margin-top:4px">Wylie: “I write down what I see, Highness. Not what you'd like me to see.”</p>
+        </div>
+      </div>
+
+      <div class="stage" style="margin-top:26px">
+        <div class="stage-h"><span class="n">✚</span><h4>Confidential afflictions</h4><span class="opt">Choose up to three. Each pays points now and costs you in play.</span></div>
+        <div class="affl" id="affl"></div>
+        <p class="flash" id="afflFlash" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="stage">
+        <div class="stage-h"><span class="n">☾</span><h4>Habits of the body</h4></div>
+        <div id="habits"></div>
+      </div>
+    </div>
+
+    <!-- C. Questions -->
+    <div class="part" id="partC">
+      <div class="part-title"><span class="letter">C</span><h3>Ten questions</h3></div>
+      <p class="part-intro">Write as much or as little as you like. These answers outrank every number above. A line is enough, and a page is welcome.</p>
+      <div class="qs" id="qs"></div>
+    </div>
+
+    <!-- D. Seal -->
+    <div class="part" id="partD">
+      <div class="part-title"><span class="letter">D</span><h3>Seal the book</h3></div>
+      <p class="part-intro">Your answers save to the Chancellery as you write. When you're done, seal the book and tell me in chat. I'll read the file, paint the portrait, and open Book II.</p>
+      <div class="sealbox">
+        <ul class="checks" id="checks"></ul>
+        <div class="seal-actions">
+          <button class="btn-seal" id="sealBtn" type="button">Seal Book I</button>
+          <button class="btn-quiet" id="copyBtn" type="button">Copy answers as text</button>
+          <p class="status" id="dbStatus" role="status" aria-live="polite">Connecting to the Chancellery…</p>
+        </div>
+      </div>
+      <div id="exportBox" hidden>
+        <label for="exportText" class="muted" style="font-size:.85rem;display:block;margin-bottom:6px">The text is selected below. Copy it and paste it into the chat.</label>
+        <textarea id="exportText" readonly></textarea>
+      </div>
+      <div class="coda">
+        <span class="hand">Book II, Blood &amp; Cradle, opens in the next message.</span>
+        <span>It decides what happened to Alexander, and why the crown comes to you.</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= DATA ================= */
+const BOOKS=[
+ {rn:"I",t:"The Sitter",d:"Face, body and the state portrait.",q:"Q1–Q10",open:true},
+ {rn:"II",t:"Blood & Cradle",d:"Lineage, the Alexander question, a childhood between Catherine and Gatchina.",q:"Q11–Q20"},
+ {rn:"III",t:"The Four Humours",d:"Temperament and the personality engine.",q:"Q21–Q30"},
+ {rn:"IV",t:"The Voice & the Room",d:"Charisma, magnetism, rhetoric, accomplishments.",q:"Q31–Q39"},
+ {rn:"V",t:"The Creed",d:"God, death, fate and the nature of man.",q:"Q40–Q50"},
+ {rn:"VI",t:"Sovereignty & Law",d:"Ideology I. Autocracy, constitution, the Senate, the code.",q:"Q51–Q63"},
+ {rn:"VII",t:"Land & Bondage",d:"Ideology II. Serfdom, the nobility, the orders of society.",q:"Q64–Q76"},
+ {rn:"VIII",t:"Treasury & Trade",d:"Ideology III. Rubles, assignats, commerce, the machine age.",q:"Q77–Q88"},
+ {rn:"IX",t:"The Sword & the World",d:"Ideology IV. Bonaparte, Britain, the Porte, the frontiers.",q:"Q89–Q101"},
+ {rn:"X",t:"The Night of the 11th",d:"Comrades, rivals, women, and what you know about tonight.",q:"Q102–Q113"}
+];
+
+const PAINTERS=[
+ {id:"borovikovsky",short:"Borovikovsky",name:"Vladimir Borovikovsky",dates:"1757–1825",
+  in1801:"Academician in Petersburg. Last year he painted your father in the robes of Grand Master of the Order of Malta.",
+  hand:"Soft, silvery, sentimental. He paints the soul a little kinder than it is.",
+  eff:"The Russian Brush.",effd:" The old nobility and the clergy see a Russian sovereign painted by a Russian hand. Legitimacy at home rises.",
+  say:"“Let me begin with the eyes, Highness. The rest follows the eyes.”"},
+ {id:"vigee",short:"Vigée Le Brun",name:"Élisabeth Vigée Le Brun",dates:"1755–1842",
+  in1801:"Marie Antoinette's painter, six years in Russia, and packing to leave this year.",
+  hand:"Luminous skin, warm eyes, flattery raised to an art.",
+  eff:"The Versailles Glow.",effd:" Salons and émigrés adore the picture; Bonaparte's people call it a Bourbon icon. She can give you only a few sittings before she leaves.",
+  say:"“Do not frown, Monseigneur. A frown costs me a week of glazes.”"},
+ {id:"shchukin",short:"Shchukin",name:"Stepan Shchukin",dates:"d. 1828",
+  in1801:"Teaches the portrait class at the Academy. His portrait of your father is so unflattering that it became famous.",
+  hand:"Hard truth. Every line exactly where it is.",
+  eff:"The Unflattering Mirror.",effd:" Those who see it trust you more. Every flaw you have goes on record.",
+  say:"“I paint what sits in the chair, Highness. If you want a saint, call a monk.”"},
+ {id:"kugelgen",short:"Kügelgen",name:"Gerhard von Kügelgen",dates:"1772–1820",
+  in1801:"A Rhinelander at court since 1798. He painted your father in 1799 and the whole family a year later.",
+  hand:"Cool, clear and idealised. Romantic light on classical drawing.",
+  eff:"The Northern Ideal.",effd:" The Baltic barons and the German courts (your mother was born a Württemberg princess) warm to you.",
+  say:"“Turn a little to the window. The northern light is honest, and it is kind.”"},
+ {id:"mosnier",short:"Mosnier",name:"Jean-Laurent Mosnier",dates:"c. 1744–1808",
+  in1801:"A French émigré, once a portraitist at Versailles, arriving from Hamburg to work for the Russian court.",
+  hand:"Parisian polish. Silk, sheen and a confident, fashionable pose.",
+  eff:"The Émigré's Polish.",effd:" The exiled Bourbon court counts you a friend. Paris counts you an enemy.",
+  say:"“Chin up, Monseigneur. Paris must see a prince, not a prisoner.”"},
+ {id:"kiprensky",short:"Kiprensky",name:"Orest Kiprensky",dates:"1782–1836",
+  in1801:"An Academy pupil about to turn nineteen, the illegitimate son of a landowner and a serf woman.",
+  hand:"Untried and daring. Either the truest likeness of the age or a failure.",
+  eff:"The Prodigy.",effd:" Hiring him tells Russia you value talent over birth. The result is less predictable. If he succeeds, he is your painter for life.",
+  say:"“Forgive me, Highness. May I look at you a long while before I start?”"}
+];
+
+const BASES=[
+ {id:"catherinian",rn:"I",name:"The Catherinian",d:"Fair curls, blue eyes, an easy smile. Your grandmother's darling."},
+ {id:"grenadier",rn:"II",name:"The Gatchina Grenadier",d:"Square jaw, dark curls, heavy brows. Your father's parade ground made flesh."},
+ {id:"ascetic",rn:"III",name:"The Ascetic",d:"Gaunt, black-haired, brooding. A monk's face in a soldier's collar."},
+ {id:"dreamer",rn:"IV",name:"The Dreamer",d:"Soft round face, snub nose, heavy lids. Paul's nose, a poet's eyes."},
+ {id:"hawk",rn:"V",name:"The Hawk",d:"Aquiline profile, high hairline, cold eyes. A profile made for coins."},
+ {id:"muscovite",rn:"VI",name:"The Muscovite",d:"Broad, flaxen and frank. A face the villages would trust."}
+];
+
+const FACE=[
+ {g:"Architecture of the head",p:[
+  {id:"faceShape",l:"Face",o:["Long oval","Oblong","Square","Heart","Round","Diamond"]},
+  {id:"forehead",l:"Forehead",o:["Low","Even","High","Very high, domed","Narrow at the temples"]},
+  {id:"cheekbones",l:"Cheekbones",o:["Flat","Soft","High","Sharp, Tatar-set"]},
+  {id:"cheeks",l:"Cheeks",o:["Hollow","Lean","Full","Heavy, jowled"]},
+  {id:"jaw",l:"Jaw",o:["Narrow","Tapered","Square","Heavy and wide"]},
+  {id:"chin",l:"Chin",o:["Receding","Rounded","Pointed","Square","Cleft","Jutting"]},
+  {id:"neck",l:"Neck",o:["Slender","Long, swan-like","Muscular","Thick and short"]}
+ ]},
+ {g:"Skin and years",p:[
+  {id:"age",l:"Apparent age",o:["Boyish, younger than his years","His true years","Older, care-worn"]},
+  {id:"complexion",l:"Complexion",o:["Alabaster","Rosy northern","Fair and freckled","Olive","Wind-burnt"]},
+  {id:"colour",l:"Colour",o:["Bloodless","Faint rose","High colour","Ruddy, veined"]},
+  {id:"marks",l:"Marks",o:["Clear skin","Faint pockmarks","A mole on the cheek","A mole above the lip","Freckles across the nose"]},
+  {id:"scar",l:"Scar",o:["None","Sabre nick through the brow","Duelling scar on the cheek","Burn along the jaw","Healed split lip"]}
+ ]},
+ {g:"The eyes",n:"The painter will spend half the sittings here.",p:[
+  {id:"eyeColour",l:"Colour",o:["Ice blue","Romanov blue-grey","Grey-green","Hazel","Dark brown","Near-black"]},
+  {id:"eyeShape",l:"Shape",o:["Almond","Large and round","Deep-set","Hooded","Downturned, melancholy","Narrow"]},
+  {id:"eyeSet",l:"Set",o:["Close-set","Even","Wide-set"]},
+  {id:"lids",l:"Lids",o:["Clear, alert","Heavy, sleepy","Shadowed, sleepless"]},
+  {id:"gaze",l:"Gaze",o:["Straight at the viewer","Off to the horizon","Sidelong, wary","Lowered, inward","Raised, visionary"]},
+  {id:"brows",l:"Brows",o:["Sparse and fair","Fine, arched","Straight and level","Thick and dark","Heavy, knitted"]},
+  {id:"browSet",l:"Brow set",o:["High, open","Even","Low, brooding"]},
+  {id:"lashes",l:"Lashes",o:["Pale, barely there","Ordinary","Long and dark"]}
+ ]},
+ {g:"Nose, mouth and ears",p:[
+  {id:"noseBridge",l:"Nose bridge",o:["Straight, Greek","Aquiline","Snub, like your father's","Hooked","Broken once"]},
+  {id:"noseSize",l:"Nose size",o:["Small","Fine","Long","Broad","Prominent"]},
+  {id:"noseTip",l:"Nose tip",o:["Pointed","Rounded","Upturned","Fleshy"]},
+  {id:"lips",l:"Lips",o:["Thin","Fine, well cut","Full","Full lower lip","Wide and sensual"]},
+  {id:"corners",l:"Mouth corners",o:["Downturned","Level","Upturned"]},
+  {id:"mouthSet",l:"Mouth set",o:["Closed and stern","A hint of a smile","Ironic half-smile","Lips slightly parted","Pressed tight"]},
+  {id:"ears",l:"Ears",o:["Small, close to the head","Ordinary","Prominent","Large lobes"]}
+ ]},
+ {g:"Hair",n:"Your father's regulations demand powder and a queue in uniform. Wearing your own hair in the portrait is a political statement.",p:[
+  {id:"hairColour",l:"Colour",o:["Flaxen","Golden blond","Light brown","Chestnut","Dark brown","Black","Auburn","Red","Ash, early grey"]},
+  {id:"hairTexture",l:"Texture",o:["Straight","Wavy","Curly","Tight curls"]},
+  {id:"hairStyle",l:"Style",o:["Powdered, with a queue (regulation)","À la Titus, a short Roman crop","Coup de vent, windswept","Natural, unpowdered, long","Cropped very short"]},
+  {id:"hairline",l:"Hairline",o:["Full","Widow's peak","High at the temples","Receding early","Thin at the crown"]},
+  {id:"sideburns",l:"Side-whiskers",o:["None","Short","Long favoris","Down to the jaw"]},
+  {id:"moustache",l:"Moustache",o:["Clean-shaven","Thin moustache, hussar style","Full moustache, a scandal in 1801"]}
+ ]},
+ {g:"The soul on the face",p:[
+  {id:"mood",l:"Mood",o:["Serene","Imperious","Melancholic","Warm","Guarded","Haunted","Amused","Fierce"]},
+  {id:"turn",l:"Head turn",o:["Three-quarter left","Three-quarter right","Profile","Full face"]},
+  {id:"tilt",l:"Tilt",o:["Chin raised","Level","Chin lowered"]},
+  {id:"bearing",l:"Bearing",o:["Rigid parade posture","Easy and relaxed","Leaning forward, eager","Withdrawn"]}
+ ]},
+ {g:"Cloth, regalia and setting",n:"The uniform you choose is read as a programme. Paul's Prussian cut says continuity; anything else says change.",p:[
+  {id:"uniform",l:"Dress",o:["Paul's Prussian cut, Preobrazhensky","Semyonovsky Life Guards","Chevalier Guard, white and red","Life Guard Hussars, scarlet dolman","Civilian tailcoat and cravat (banned by your father)","Your own design, gold bullion epaulettes"]},
+  {id:"orders",l:"Orders",multi:true,o:["Sash and star of St Andrew","Maltese cross of St John","St Anna","Star of St Alexander Nevsky","None at all"]},
+  {id:"holding",l:"In hand",o:["Nothing, hands out of frame","Sword hilt","Gloves","A letter","A book","A map","Plumed bicorne"]},
+  {id:"framing",l:"Framing",o:["Bust","Half-length","Three-quarter length","Full-length state portrait"]},
+  {id:"background",l:"Background",o:["Stormy sky","Column and red drapery","Window onto the Neva","Battle smoke","Plain dark ground","Gatchina park","Study with a bust of Peter the Great"]},
+  {id:"light",l:"Light",o:["Soft daylight","Dramatic side light","Cold northern light","Candlelight","Golden evening light"]}
+ ]}
+];
+const FACE_IDS=FACE.flatMap(g=>g.p.map(p=>p.id));
+
+const ATTRS=[
+ {id:"wind",n:"Wind",d:"Lungs and stamina. Six-hour reviews, forced marches, a chase on foot."},
+ {id:"sinew",n:"Sinew",d:"Raw strength. Holding a rearing horse, carrying a wounded man."},
+ {id:"seat",n:"Seat",d:"Horsemanship. The army judges a sovereign by how he sits a horse."},
+ {id:"handeye",n:"Hand & Eye",d:"Sword, pistol, billiards, every fine work of the hands."},
+ {id:"gut",n:"Iron Gut",d:"Bad water, ten-course dinners, punch, and whatever someone slips into your cup."},
+ {id:"blood",n:"Blood",d:"Resistance to fevers, typhus, consumption and smallpox."},
+ {id:"nerve",n:"Body's Nerve",d:"Pain, shock and sleepless nights without breaking."},
+ {id:"frost",n:"Frost",d:"Winter in the saddle. A bivouac at minus twenty-five Réaumur."},
+ {id:"ears",n:"Ears",d:"Hearing a whisper across a crowded hall."},
+ {id:"eyes",n:"Eyes",d:"Reading a face across a ballroom, or a battlefield through a glass."},
+ {id:"mend",n:"Mending",d:"How fast wounds close and fevers break."},
+ {id:"vigour",n:"Vigour",d:"Virility and fertility. The dynasty needs sons."},
+ {id:"grace",n:"Grace",d:"Posture and dancing. How your body reads in a ballroom."},
+ {id:"years",n:"Years",d:"Longevity. Governs the rolls of age after forty."}
+];
+const BASE_LVL=3, POOL=30;
+
+const AFFL=[
+ {id:"deaf",n:"Deaf in the left ear",p:3,d:"Cannon at the drill ground in your boyhood. Whispers on your left are lost, and clever courtiers learn to stand on your right."},
+ {id:"myopia",n:"Short sight",p:2,d:"Faces blur beyond ten paces. You need a lorgnette, which some call foppish."},
+ {id:"stammer",n:"Stammer under strain",p:3,d:"In anger or fear the words jam. Speeches become dice rolls."},
+ {id:"megrims",n:"Megrims",p:2,d:"Blinding headaches, two or three days a month, with no warning."},
+ {id:"chest",n:"Weak chest",p:4,d:"A cough every winter. The physicians whisper the word consumption."},
+ {id:"insomnia",n:"Your father's sleeplessness",p:3,d:"Nights awake. Fatigue penalties stack, and so does suspicion."},
+ {id:"gout",n:"Gouty blood",p:2,d:"Nothing yet. After thirty, rich food and wine will cost you your feet."},
+ {id:"falling",n:"The falling sickness",p:5,d:"Rare fits. If one comes in public, the throne itself is in question."},
+ {id:"lame",n:"An old riding fall",p:3,d:"A stiff knee. You limp when tired, and the parade ground notices."},
+ {id:"haemo",n:"Faint at the sight of blood",p:3,d:"A wound turns you grey. Dangerous in a soldier-emperor."},
+ {id:"tic",n:"A nervous tic",p:2,d:"An eyelid or cheek twitches when you are pressed. Ambassadors notice."},
+ {id:"teeth",n:"Bad teeth",p:1,d:"Toothache, a closed-lipped smile, a weakness for sweets."},
+ {id:"bald",n:"Early baldness",p:1,d:"The temples are going already. The painter will want to know."},
+ {id:"seasick",n:"Seasickness",p:1,d:"The Baltic Fleet will never see you smile."}
+];
+const MAX_AFFL=3;
+
+const BUILD=["Slight","Lean","Athletic","Broad","Stout","Heavy"];
+const HAND=["Right","Left, beaten out of you by tutors","Left, and proud of it","Both"];
+const HABITS=[
+ {id:"drink",l:"Drink",o:["Abstains","Wine at table","Hard drinker","Punch and brandy with the Guards"]},
+ {id:"tobacco",l:"Tobacco",o:["None","Snuff","Pipe","Cigars, rare and Spanish"]},
+ {id:"sleep",l:"Sleep",o:["Four hours","Six hours","Eight hours","Erratic"]},
+ {id:"exercise",l:"Exercise",o:["Riding at dawn","Fencing","Long walks","Cold baths in the Neva","None"]},
+ {id:"table",l:"Table",o:["Spartan","Russian: cabbage soup and kasha","French cooking","Gluttonous"]}
+];
+
+const QS=[
+ {t:"The sentry's glimpse",p:"A grenadier on the dark staircase of St Michael's Castle knows it is you before he sees your face. What gives you away: your silhouette, your gait, your step, your scent?"},
+ {t:"Grandmother's verdict",p:"When you were a boy, Catherine the Great looked you over and said one sentence about your looks that the court repeated for years. What was it? Was she right?"},
+ {t:"Father's mockery",p:"On the Gatchina parade ground, Paul mocked something about your body or bearing in front of his officers. What was it, and what have you done about it since?"},
+ {t:"The hands",p:"Describe your hands. What do they look like, and what are they doing when you think?"},
+ {t:"What the painter must leave out",p:"What will you ask the painter to omit: a scar, a mark, a flaw, a habit of the face? Tell the story behind it. If nothing, explain why you are so sure of your own face."},
+ {t:"The forbidden wardrobe",p:"Your father has banned round hats, frock coats, waistcoats and laced shoes as Jacobin fashions. What do you wear in private? Do you obey the ban?"},
+ {t:"The horse",p:"Name your horse, its breed and its colour, and say why that horse. The army judges a grand duke by his seat at reviews."},
+ {t:"Two kinds of whisper",p:"What do the ladies of the court say about your looks behind their fans? What do the Guards officers say about your body over punch? Give both. They are not the same."},
+ {t:"The morning",p:"Take your body from waking to the first audience. When do you rise? How do you wash: cold water, perfume, a valet? What do you eat? Who shaves you, and do you trust him with the razor?"},
+ {t:"The mirror tonight",p:"Tonight, 11 March 1801, you look in a mirror. What do you see that frightens you, and what do you see that gives you hope?"}
+];
+
+/* ================= STATE ================= */
+const LS_KEY="artemiy.book1.v1";
+function blank(){
+  const attrs={}; ATTRS.forEach(a=>attrs[a.id]=BASE_LVL);
+  return {painter:null,base:null,face:{},notes:"",
+    body:{height:8,weight:175,build:null,hand:null,attrs,affl:[],habits:{}},
+    q:Array(QS.length).fill(""),status:"draft",updatedAt:null,sealedAt:null};
+}
+let S=blank(); let dirty=false;
+
+function merge(d){
+  const b=blank(); if(!d||typeof d!=="object") return b;
+  b.painter=d.painter??null; b.base=d.base??null;
+  b.face=Object.assign({},d.face||{}); b.notes=typeof d.notes==="string"?d.notes:"";
+  const db=d.body||{};
+  b.body.height=typeof db.height==="number"?db.height:8;
+  b.body.weight=typeof db.weight==="number"?db.weight:175;
+  b.body.build=db.build??null; b.body.hand=db.hand??null;
+  Object.keys(b.body.attrs).forEach(k=>{ if(db.attrs&&typeof db.attrs[k]==="number") b.body.attrs[k]=db.attrs[k]; });
+  b.body.affl=Array.isArray(db.affl)?db.affl.slice(0,MAX_AFFL):[];
+  b.body.habits=Object.assign({},db.habits||{});
+  if(Array.isArray(d.q)) d.q.forEach((v,i)=>{ if(i<QS.length&&typeof v==="string") b.q[i]=v; });
+  b.status=d.status==="sealed"?"sealed":"draft"; b.updatedAt=d.updatedAt||null; b.sealedAt=d.sealedAt||null;
+  return b;
+}
+function loadLocal(){ try{ const raw=localStorage.getItem(LS_KEY); return raw?JSON.parse(raw):null; }catch(e){ return null; } }
+function saveLocal(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(S)); }catch(e){} }
+
+/* ================= HELPERS ================= */
+const $=s=>document.querySelector(s);
+function el(tag,attrs,html){ const e=document.createElement(tag); if(attrs) for(const k in attrs){ if(k==="class") e.className=attrs[k]; else e.setAttribute(k,attrs[k]); } if(html!=null) e.innerHTML=html; return e; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function words(s){ const m=(s||"").trim().match(/\S+/g); return m?m.length:0; }
+
+/* ---------- body maths ---------- */
+function stepCost(k){ return k<=6?1:(k<=8?2:3); }        // cost to reach level k from k-1 (k>3)
+function cum(L){ if(L<=BASE_LVL) return L-BASE_LVL; let c=0; for(let k=BASE_LVL+1;k<=L;k++) c+=stepCost(k); return c; }
+function bonus(){ return S.body.affl.reduce((s,id)=>{ const a=AFFL.find(x=>x.id===id); return s+(a?a.p:0); },0); }
+function spent(){ return ATTRS.reduce((s,a)=>s+cum(S.body.attrs[a.id]),0); }
+function left(){ return POOL+bonus()-spent(); }
+function heightTxt(v){ const whole=Math.floor(v), half=v%1!==0; return "2 arshins "+whole+(half?"½":"")+" vershok"+(whole===1&&!half?"":"s"); }
+function heightCm(v){ return (142.24+v*4.445).toFixed(1); }
+function weightTxt(f){ const p=Math.floor(f/40), r=f%40; return p+" poods"+(r?" "+r+" funt"+(r===1?"":"s"):""); }
+function weightKg(f){ return (f*0.40951).toFixed(1); }
+
+/* ================= RENDER ================= */
+function renderBooks(){
+  const box=$("#books"); box.innerHTML="";
+  BOOKS.forEach(b=>{
+    const c=el("div",{class:"book"+(b.open?" open":"")});
+    c.innerHTML=`<span class="wax" aria-hidden="true">${b.open?"OPEN":b.rn}</span><span class="rn">${b.rn}</span><h3>${esc(b.t)}</h3><p>${esc(b.d)}</p><span class="q sc">${b.q}${b.open?" · open now":" · sealed"}</span>`;
+    box.appendChild(c);
+  });
+}
+function renderTally(){
+  const qDone=S.q.filter(v=>v.trim()).length;
+  $("#tally").innerHTML=`<span><b class="num">${qDone}</b> of 113 questions answered</span><span><b class="num">1</b> of 10 books open</span><span><b class="num">${S.status==="sealed"?"1":"0"}</b> books sealed</span>`;
+}
+
+function renderPainters(){
+  const box=$("#painters"); box.innerHTML="";
+  PAINTERS.forEach(p=>{
+    const b=el("button",{class:"painter",type:"button","data-painter":p.id,"aria-pressed":String(S.painter===p.id)});
+    b.innerHTML=`<span class="tag sc">Engaged</span><span class="pn">${esc(p.name)}</span><span class="pd num">${p.dates}</span><span class="pl"><i>In 1801.</i> ${esc(p.in1801)}</span><span class="pl"><i>His hand.</i> ${esc(p.hand)}</span><span class="pe"><b>${esc(p.eff)}</b>${esc(p.effd)}</span>`;
+    if(p.id==="vigee") b.querySelectorAll(".pl")[1].querySelector("i").textContent="Her hand.";
+    box.appendChild(b);
+  });
+}
+function renderBases(){
+  const hot=$("#hot"); hot.innerHTML="";
+  const list=$("#bases"); list.innerHTML="";
+  BASES.forEach(b=>{
+    const h=el("button",{type:"button","data-base":b.id,"aria-pressed":String(S.base===b.id),"aria-label":b.name});
+    h.innerHTML=`<span>${b.rn} · ${esc(b.name)}</span>`; hot.appendChild(h);
+    const c=el("button",{class:"base",type:"button","data-base":b.id,"aria-pressed":String(S.base===b.id)});
+    c.innerHTML=`<b>${b.rn} · ${esc(b.name)}</b>${esc(b.d)}`; list.appendChild(c);
+  });
+  const none=el("button",{class:"base",type:"button","data-base":"none","aria-pressed":String(S.base==="none")});
+  none.innerHTML=`<b>None of them</b>Paint me from the features alone.`; list.appendChild(none);
+}
+function chip(key,val,on,extra){ return `<button type="button" class="chip" data-k="${key}" data-v="${esc(val)}" aria-pressed="${on}">${esc(val)}${extra||""}</button>`; }
+function renderFace(){
+  const box=$("#face"); box.innerHTML="";
+  FACE.forEach((g,gi)=>{
+    const fs=el("fieldset",{class:"grp"});
+    let h=`<legend>${esc(g.g)}</legend>`+(g.n?`<p class="grp-note">${esc(g.n)}</p>`:"");
+    g.p.forEach(p=>{
+      const cur=S.face[p.id];
+      h+=`<div class="prow"><span class="pk" id="pk-${p.id}">${esc(p.l)}${p.multi?" (several)":""}</span><div class="chips" role="group" aria-labelledby="pk-${p.id}">`+
+        p.o.map(o=>chip("face."+p.id,o,p.multi?(Array.isArray(cur)&&cur.includes(o)):cur===o)).join("")+`</div></div>`;
+    });
+    fs.innerHTML=h; box.appendChild(fs);
+  });
+}
+function renderLedger(){
+  const chosen=FACE_IDS.filter(id=>{ const v=S.face[id]; return Array.isArray(v)?v.length>0:!!v; }).length;
+  const pct=Math.round(chosen/FACE_IDS.length*100);
+  $("#likeBar").style.width=pct+"%"; $("#likeTxt").textContent=chosen+" of "+FACE_IDS.length; $("#likePct").textContent=pct+"%";
+  const P=PAINTERS.find(p=>p.id===S.painter);
+  let v;
+  if(!P) v="No painter engaged yet.";
+  else if(pct<35) v=P.short+": "+P.say;
+  else if(pct<70) v="The underpainting is laid in. "+P.short+" is mixing the flesh tones.";
+  else v="Enough to begin. "+P.short+" asks for the first sitting.";
+  $("#verdict").textContent=v;
+  let rows="";
+  if(P) rows+=`<dt>Painter</dt><dd>${esc(P.name)}</dd>`;
+  const B=BASES.find(b=>b.id===S.base); if(B) rows+=`<dt>Type</dt><dd>${esc(B.name)}</dd>`; else if(S.base==="none") rows+=`<dt>Type</dt><dd>From features alone</dd>`;
+  FACE.forEach(g=>g.p.forEach(p=>{ const val=S.face[p.id]; const t=Array.isArray(val)?val.join(", "):val; if(t) rows+=`<dt>${esc(p.l)}</dt><dd>${esc(t)}</dd>`; }));
+  if(S.notes.trim()) rows+=`<dt>Notes</dt><dd>${esc(S.notes.trim().slice(0,140))}${S.notes.trim().length>140?"…":""}</dd>`;
+  $("#ledgerList").innerHTML=rows?`<dl>${rows}</dl>`:`<p class="empty">The ledger is empty. Every choice you make is written here in the painter's hand.</p>`;
+}
+
+function renderMeasures(){
+  $("#height").value=S.body.height; $("#weight").value=S.body.weight;
+  $("#hVal").textContent=heightTxt(S.body.height); $("#hCm").textContent="≈ "+heightCm(S.body.height)+" cm";
+  $("#wVal").textContent=weightTxt(S.body.weight); $("#wCm").textContent="≈ "+weightKg(S.body.weight)+" kg";
+  $("#build").innerHTML=BUILD.map(o=>chip("body.build",o,S.body.build===o)).join("");
+  $("#hand").innerHTML=HAND.map(o=>chip("body.hand",o,S.body.hand===o)).join("");
+}
+function renderAttrs(){
+  const box=$("#attrs"); box.innerHTML=""; const L=left();
+  ATTRS.forEach(a=>{
+    const lv=S.body.attrs[a.id];
+    const canUp=lv<10&&(cum(lv+1)-cum(lv))<=L;
+    const canDown=lv>1;
+    let pips=""; for(let k=1;k<=10;k++){ const t=k<=6?"":(k<=8?" t2":" t3"); pips+=`<i class="${k<=lv?"on"+t:""}"></i>`; }
+    const r=el("div",{class:"attr"});
+    r.innerHTML=`<span class="an">${esc(a.n)}</span><span class="ad">${esc(a.d)}</span><span class="ctl"><button class="step" type="button" data-attr="${a.id}" data-dir="-1" aria-label="Lower ${esc(a.n)}" ${canDown?"":"disabled"}>−</button><span class="pips" aria-hidden="true">${pips}</span><span class="lvl num" aria-label="${esc(a.n)} level">${lv}</span><button class="step" type="button" data-attr="${a.id}" data-dir="1" aria-label="Raise ${esc(a.n)}" ${canUp?"":"disabled"}>+</button></span>`;
+    box.appendChild(r);
+  });
+  const lf=left(); const bn=bonus();
+  const big=$("#poolLeft"); big.textContent=lf; big.classList.toggle("neg",lf<0);
+  $("#poolOf").textContent="of "+(POOL+bn)+(bn?" ("+POOL+" + "+bn+" from afflictions)":" (no afflictions)");
+  drawRadar();
+}
+function drawRadar(){
+  const n=ATTRS.length, cx=180, cy=185, R=120; let s="";
+  for(let r=2;r<=10;r+=2){ let pts=[]; for(let i=0;i<n;i++){ const a=i*2*Math.PI/n-Math.PI/2; pts.push((cx+Math.cos(a)*R*r/10).toFixed(1)+","+(cy+Math.sin(a)*R*r/10).toFixed(1)); } s+=`<polygon class="ring" points="${pts.join(" ")}"/>`; }
+  let area=[], dots="", labels="";
+  for(let i=0;i<n;i++){
+    const a=i*2*Math.PI/n-Math.PI/2, c=Math.cos(a), sn=Math.sin(a);
+    s+=`<line class="spoke" x1="${cx}" y1="${cy}" x2="${(cx+c*R).toFixed(1)}" y2="${(cy+sn*R).toFixed(1)}"/>`;
+    const lv=S.body.attrs[ATTRS[i].id]; const x=cx+c*R*lv/10, y=cy+sn*R*lv/10;
+    area.push(x.toFixed(1)+","+y.toFixed(1)); dots+=`<circle class="dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3"/>`;
+    const lx=cx+c*(R+14), ly=cy+sn*(R+14)+ (sn>0.5?10:(sn<-0.5?-2:4));
+    const anchor=c>0.25?"start":(c<-0.25?"end":"middle");
+    labels+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}">${esc(ATTRS[i].n)} <tspan class="v" style="fill:var(--ink);font-family:var(--f-display)">${lv}</tspan></text>`;
+  }
+  s+=`<polygon class="area" points="${area.join(" ")}"/>`+dots+labels;
+  $("#radar").innerHTML=s;
+}
+function renderAffl(){
+  const box=$("#affl"); box.innerHTML="";
+  const full=S.body.affl.length>=MAX_AFFL;
+  AFFL.forEach(a=>{
+    const on=S.body.affl.includes(a.id);
+    const b=el("button",{class:"ail",type:"button","data-affl":a.id,"aria-pressed":String(on),"aria-disabled":String(!on&&full)});
+    b.innerHTML=`<span class="at"><b>${esc(a.n)}</b><span class="num">+${a.p}</span></span><p>${esc(a.d)}</p>`;
+    box.appendChild(b);
+  });
+}
+function renderHabits(){
+  const box=$("#habits"); box.innerHTML="";
+  HABITS.forEach(h=>{
+    const r=el("div",{class:"prow"});
+    r.innerHTML=`<span class="pk" id="hk-${h.id}">${esc(h.l)}</span><div class="chips" role="group" aria-labelledby="hk-${h.id}">`+h.o.map(o=>chip("habit."+h.id,o,S.body.habits[h.id]===o)).join("")+`</div>`;
+    box.appendChild(r);
+  });
+}
+function renderQs(){
+  const box=$("#qs"); box.innerHTML="";
+  QS.forEach((q,i)=>{
+    const c=el("div",{class:"qcard"+(S.q[i].trim()?" done":"")});
+    c.innerHTML=`<div class="qn num">${i+1}<small class="sc">Question</small></div><h4 id="qt-${i}">${esc(q.t)}</h4><p class="qp">${esc(q.p)}</p><div><textarea id="q${i+1}" data-q="${i}" aria-labelledby="qt-${i}" rows="4"></textarea><div class="qmeta"><span>Your words outrank your numbers.</span><span class="num" id="wc-${i}">0 words</span></div></div>`;
+    box.appendChild(c);
+    const ta=c.querySelector("textarea"); ta.value=S.q[i]; $("#wc-"+i).textContent=words(S.q[i])+" words";
+  });
+}
+function renderChecks(){
+  const qDone=S.q.filter(v=>v.trim()).length;
+  const chosen=FACE_IDS.filter(id=>{ const v=S.face[id]; return Array.isArray(v)?v.length>0:!!v; }).length;
+  const P=PAINTERS.find(p=>p.id===S.painter); const lf=left();
+  const items=[
+    {ok:!!P,b:P?P.short:"None",t:"Painter"},
+    {ok:!!S.base,b:S.base?(S.base==="none"?"Features only":BASES.find(b=>b.id===S.base).name.replace("The ","")):"None",t:"Sitter's type"},
+    {ok:chosen>=Math.ceil(FACE_IDS.length*.6),b:chosen+" / "+FACE_IDS.length,t:"Features given"},
+    {ok:lf===0,b:lf>=0?lf+" left":"Over by "+(-lf),t:"Body points"},
+    {ok:qDone===QS.length,b:qDone+" / "+QS.length,t:"Questions answered"}
+  ];
+  $("#checks").innerHTML=items.map(i=>`<li class="${i.ok?"ok":""}"><b class="num">${esc(i.b)}</b>${esc(i.t)}</li>`).join("");
+  $("#sealBtn").textContent=S.status==="sealed"?"Re-seal Book I":"Seal Book I";
+}
+function renderAll(){
+  $("#featCount").textContent=FACE_IDS.length;
+  renderBooks(); renderTally(); renderPainters(); renderBases(); renderFace(); $("#painterNotes").value=S.notes; renderLedger();
+  renderMeasures(); renderAttrs(); renderAffl(); renderHabits(); renderQs(); renderChecks();
+}
+
+/* ================= INTERACTION ================= */
+function changed(){ dirty=true; S.updatedAt=new Date().toISOString(); saveLocal(); scheduleSave(); renderChecks(); renderTally(); }
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button"); if(!t) return;
+  if(t.dataset.painter){ S.painter=S.painter===t.dataset.painter?null:t.dataset.painter; renderPainters(); renderLedger(); changed(); return; }
+  if(t.dataset.base){ S.base=S.base===t.dataset.base?null:t.dataset.base; renderBases(); renderLedger(); changed(); return; }
+  if(t.dataset.k){
+    const [scope,key]=t.dataset.k.split("."); const v=t.dataset.v;
+    if(scope==="face"){
+      const def=FACE.flatMap(g=>g.p).find(p=>p.id===key);
+      if(def.multi){
+        let arr=Array.isArray(S.face[key])?S.face[key].slice():[];
+        if(v==="None at all") arr=arr.includes(v)?[]:[v];
+        else { arr=arr.filter(x=>x!=="None at all"); arr=arr.includes(v)?arr.filter(x=>x!==v):arr.concat(v); }
+        S.face[key]=arr;
+        t.parentElement.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(arr.includes(c.dataset.v))));
+      } else {
+        S.face[key]=S.face[key]===v?null:v;
+        t.parentElement.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(S.face[key]===c.dataset.v)));
+      }
+      renderLedger(); changed(); return;
+    }
+    if(scope==="body"){ S.body[key]=S.body[key]===v?null:v; t.parentElement.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(S.body[key]===c.dataset.v))); changed(); return; }
+    if(scope==="habit"){ S.body.habits[key]=S.body.habits[key]===v?null:v; t.parentElement.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(S.body.habits[key]===c.dataset.v))); changed(); return; }
+  }
+  if(t.dataset.attr){
+    const id=t.dataset.attr, dir=+t.dataset.dir, lv=S.body.attrs[id], nl=lv+dir;
+    if(nl<1||nl>10) return;
+    const delta=cum(nl)-cum(lv);
+    if(delta>0&&delta>left()) return;
+    S.body.attrs[id]=nl; renderAttrs(); changed();
+    const again=document.querySelector(`.step[data-attr="${id}"][data-dir="${dir}"]`); if(again&&!again.disabled) again.focus();
+    return;
+  }
+  if(t.dataset.affl){
+    const id=t.dataset.affl, a=AFFL.find(x=>x.id===id), on=S.body.affl.includes(id); const fl=$("#afflFlash");
+    if(on){
+      if(left()-a.p<0){ fl.textContent="Lower an attribute first. Removing "+a.n.toLowerCase()+" would take back "+a.p+" points you've already spent."; return; }
+      S.body.affl=S.body.affl.filter(x=>x!==id); fl.textContent="";
+    } else {
+      if(S.body.affl.length>=MAX_AFFL){ fl.textContent="Wylie records three afflictions at most. Remove one to choose another."; return; }
+      S.body.affl=S.body.affl.concat(id); fl.textContent="";
+    }
+    renderAffl(); renderAttrs(); changed(); return;
+  }
+});
+document.addEventListener("input",e=>{
+  const t=e.target;
+  if(t.id==="painterNotes"){ S.notes=t.value; renderLedger(); changed(); return; }
+  if(t.id==="height"){ S.body.height=parseFloat(t.value); $("#hVal").textContent=heightTxt(S.body.height); $("#hCm").textContent="≈ "+heightCm(S.body.height)+" cm"; changed(); return; }
+  if(t.id==="weight"){ S.body.weight=parseInt(t.value,10); $("#wVal").textContent=weightTxt(S.body.weight); $("#wCm").textContent="≈ "+weightKg(S.body.weight)+" kg"; changed(); return; }
+  if(t.dataset.q!=null){ const i=+t.dataset.q; S.q[i]=t.value; $("#wc-"+i).textContent=words(t.value)+" words"; t.closest(".qcard").classList.toggle("done",!!t.value.trim()); changed(); return; }
+});
+
+/* ================= EXPORT ================= */
+function exportText(){
+  const L=[]; const P=PAINTERS.find(p=>p.id===S.painter); const B=BASES.find(b=>b.id===S.base);
+  L.push("BOOK I · THE SITTER");
+  L.push("Painter: "+(P?P.name:"(none)")); L.push("Type: "+(B?B.name:(S.base==="none"?"From features alone":"(none)")));
+  FACE.forEach(g=>{ L.push("· "+g.g); g.p.forEach(p=>{ const v=S.face[p.id]; const t=Array.isArray(v)?v.join(", "):v; if(t) L.push("  "+p.l+": "+t); }); });
+  if(S.notes.trim()) L.push("Painter notes: "+S.notes.trim());
+  L.push("BODY: height "+heightTxt(S.body.height)+" ("+heightCm(S.body.height)+" cm), weight "+weightTxt(S.body.weight)+" ("+weightKg(S.body.weight)+" kg), frame "+(S.body.build||"-")+", hand "+(S.body.hand||"-"));
+  L.push("Attributes: "+ATTRS.map(a=>a.n+" "+S.body.attrs[a.id]).join(", ")+" | points left "+left());
+  L.push("Afflictions: "+(S.body.affl.length?S.body.affl.map(id=>AFFL.find(a=>a.id===id).n).join(", "):"none"));
+  L.push("Habits: "+HABITS.map(h=>h.l+" "+(S.body.habits[h.id]||"-")).join(", "));
+  QS.forEach((q,i)=>{ L.push("Q"+(i+1)+" "+q.t+": "+(S.q[i].trim()||"(blank)")); });
+  return L.join("\n");
+}
+$("#copyBtn").addEventListener("click",()=>{
+  const txt=exportText(); const box=$("#exportBox"), ta=$("#exportText"); ta.value=txt;
+  const fallback=()=>{ box.hidden=false; ta.focus(); ta.select(); };
+  try{
+    navigator.clipboard.writeText(txt).then(()=>{ $("#copyBtn").textContent="Copied"; setTimeout(()=>$("#copyBtn").textContent="Copy answers as text",2200); },fallback);
+  }catch(err){ fallback(); }
+});
+
+/* ================= CHANCELLERY (db) ================= */
+let ref=null, writing=false, again=false, timer=null;
+function status(msg,cls){ const s=$("#dbStatus"); s.textContent=msg; s.className="status"+(cls?" "+cls:""); }
+function hhmm(){ const d=new Date(); return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+function scheduleSave(){ if(!ref) return; clearTimeout(timer); status("Unsaved changes…"); timer=setTimeout(flush,1800); }
+async function flush(retried){
+  if(!ref) return;
+  if(writing){ again=true; return; }
+  writing=true; status("Saving to the Chancellery…");
+  try{ await ref.set(JSON.parse(JSON.stringify(S))); status((S.status==="sealed"?"Sealed and saved ":"Saved ")+hhmm(),"ok"); }
+  catch(err){
+    const code=err&&err.code;
+    if(code==="unavailable"&&!retried){ writing=false; setTimeout(()=>flush(true),900+Math.random()*900); return; }
+    status("Couldn't save to the Chancellery ("+(code||"error")+"). Your answers are kept in this browser. Use Copy answers as text.","warn");
+  }
+  writing=false; if(again){ again=false; flush(); }
+}
+$("#sealBtn").addEventListener("click",()=>{
+  S.status="sealed"; S.sealedAt=new Date().toISOString(); S.updatedAt=S.sealedAt; saveLocal(); renderChecks(); renderTally();
+  if(ref){ clearTimeout(timer); flush(); } else status("Sealed in this browser only. Use Copy answers as text and paste it into the chat.","warn");
+});
+
+/* ================= BOOT ================= */
+const local=loadLocal(); if(local) S=merge(local);
+renderAll();
+(async()=>{
+  let db=null;
+  try{ db=window.claude&&window.claude.use?await window.claude.use("db"):null; }catch(e){ db=null; }
+  if(!db){ status("Not connected to the Chancellery. Answers stay in this browser. Use Copy answers as text.","warn"); return; }
+  try{
+    ref=db.doc("answers/book1");
+    const snap=await ref.get();
+    if(snap.exists&&!dirty){ S=merge(snap.data()); saveLocal(); renderAll(); status("Loaded from the Chancellery","ok"); }
+    else if(dirty){ flush(); }
+    else status("Connected. Answers save as you write.","ok");
+  }catch(err){ status("Couldn't reach the Chancellery ("+((err&&err.code)||"error")+"). Answers stay in this browser.","warn"); }
+})();
+})();
+</script>
