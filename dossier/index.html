@@ -1595,11 +1595,11 @@ const FATES={
  vanished:{n:"The empty bed",t:"Vanished",d:"Tonight your brother is gone. His bed has not been slept in, his horse is in its stall, and no one saw him leave.",hook:"Real hook: Alexander's quiet escapes from court life, and the legend that he later disappeared as the hermit Fyodor Kuzmich.",L:55,C:60,S:50},
  renounced:{n:"The Rhine letter",t:"Renounced",d:"He wrote that he would rather live as a private man on the Rhine. In this world he signed a renunciation, and Paul accepted it. The paper exists. Not everyone believes it.",hook:"Real hook: on 10 May 1796 Alexander wrote to Kochubey that he meant to give up the throne and live quietly with his wife on the banks of the Rhine.",L:65,C:45,S:35},
  dead:{n:"The staircase",t:"Dead",d:"He is dead tonight. How, and by whose hand, is the first secret of your reign. Every eye will turn to you.",hook:"Real hook: the chaos of the night of 11 March, when armed and drunk officers filled St Michael's Castle.",L:60,C:55,S:80},
- disinherited:{n:"Paul's last act",t:"Disinherited",d:"Paul, sure that his eldest is plotting against him, signs an act naming you heir. Hours later Paul is dead and your brother is alive and furious.",hook:"Real hook: Pahlen showed Alexander an arrest order signed by Paul, and Paul reportedly told Baron Diebitsch he would make his 13-year-old nephew Eugen of Württemberg heir instead.",L:45,C:85,S:55},
+ disinherited:{n:"Paul's last act",t:"Disinherited",d:"Paul, sure that his eldest is plotting against him, signs an act naming you heir. Hours later Paul is dead and your brother is alive and furious.",hook:"Real hook: Pahlen later claimed he showed Alexander an arrest order signed by Paul, and Paul reportedly told Baron Diebitsch he would make his 13-year-old nephew Eugen of Württemberg heir instead.",L:45,C:85,S:55},
  custom:{n:"Your own words",t:"Your words",d:"None of these. You will tell the Expedition what really happened in the first letter below.",hook:"Whatever you write there becomes canon, as long as it holds together with history before tonight.",L:60,C:50,S:50}
 };
 const CFATES={
- renounced:{n:"He wants no crown",t:"Renounced",d:"Constantine has said aloud that he will never take a throne won like this. He has signed it away.",hook:"Real hook: Constantine is remembered for saying they would strangle him as they strangled his father, and in 1822 he did secretly renounce the throne.",L:-5,C:10,S:5},
+ renounced:{n:"He wants no crown",t:"Renounced",d:"Constantine has said aloud that he will never take a throne won like this. He has signed it away.",hook:"Real hook: after the murder Constantine told Sablukov his brother could reign if he liked, but he himself would never accept the throne. In 1822 he did secretly renounce it.",L:-5,C:10,S:5},
  disinherited:{n:"Struck out with Alexander",t:"Disinherited",d:"Paul's act strikes out both elder sons at once.",hook:"Real hook: Paul's suspicion fell on both elder sons in his last weeks.",L:-10,C:15,S:5},
  dead:{n:"A second death",t:"Dead",d:"Constantine dies too. Two dead brothers in one night is not a thing Europe will forget.",hook:"Pure invention. History offers no hook for it.",L:-10,C:15,S:20},
  custom:{n:"Your own words",t:"Your words",d:"Explain it in the first letter.",hook:"Canon once written.",L:-5,C:10,S:10}
@@ -1617,7 +1617,7 @@ const MEMS=[
  {id:"m4",t:"Summers at Tsarskoye Selo: the Cameron Gallery, the Chinese Village, swans on the great pond.",y:"1780s–90s",w:1},
  {id:"m5",t:"Mornings in Prussian uniform at Gatchina, evenings in French silk at Catherine's court.",y:"1790s",w:2},
  {id:"m6",t:"Your father's drill ground: cannon, canes, and Arakcheyev's voice across the square.",y:"1790s",w:2},
- {id:"m7",t:"La Harpe dismissed and sent home to Switzerland.",y:"1795",w:2},
+ {id:"m7",t:"La Harpe, accused of Jacobinism, dismissed and sent home to Switzerland.",y:"spring 1795",w:2},
  {id:"m8",t:"Catherine dies. Your father's Gatchina men pour into the Winter Palace in their Prussian coats.",y:"6 Nov 1796",w:3},
  {id:"m9",t:"Paul exhumes Peter III and makes Count Alexei Orlov carry the crown behind the coffin.",y:"Dec 1796",w:2},
  {id:"m10",t:"The coronation in Moscow, and Paul's Act of Succession read out in the Kremlin.",y:"5 Apr 1797",w:2},
@@ -1887,7 +1887,7 @@ function LETTERS(){ const br=brotherForLetter(); return [
   body:"I taught you that a prince is only the first servant of the law, and that the people are not his property. Your grandmother once tried to make me her go-between against your father, and I pretended not to understand her. I wonder which of my lessons survived Gatchina.",
   ask:"<b>The republican's lessons.</b> Which of La Harpe's lessons do you still believe, and which did you throw away?"},
  {from:br,role:"your brother",place:"St Michael's Castle",date:"11 March 1801, after supper",
-  body:"Brother. This morning Father had Obolyaninov swear us in again in the castle church, both of us, like two schoolboys caught stealing apples. Then he fed us supper as if nothing had happened. Do you remember when we were boys?",
+  body:"Brother. Today Father had Obolyaninov swear us in again in the castle church, both of us, like two schoolboys caught stealing apples. Then he fed us supper as if nothing had happened. Do you remember when we were boys?",
   ask:`<b>The brother.</b> What is ${br} to you: ally, rival, danger or burden? Tell one scene from your boyhood together.`},
  {from:"Field Marshal Count Nikolai Saltykov",role:"your chief governor in boyhood, now head of the War College",place:"St Petersburg",date:"March 1801",
   body:"I had charge of your upbringing, and I never spared the rod or the reprimand when the Empress wished it. I hope Your Highness bears me no grudge.",
@@ -1896,7 +1896,7 @@ function LETTERS(){ const br=brotherForLetter(); return [
   body:"For the file: the matrimonial status of His Imperial Highness, and its bearing on the succession and on the courts of Europe.",
   ask:"<b>The marriage.</b> Are you married? Choose below, then tell the story of your marriage, or of why you have none.",marriage:true},
  {from:"Alexei Arakcheyev",role:"Gatchina's drillmaster, in disgrace since 1799",place:"Gruzino, his estate",date:"early March 1801",
-  body:"On the night your grandmother died I rode in from Gatchina at your father's side, and by morning I was Commandant of the capital. I remember where everyone stood that night, Highness. Where were you?",
+  body:"On the night your grandmother died I rode in from Gatchina at your father's side, and the next day I was Commandant of the capital. I remember where everyone stood that night, Highness. Where were you?",
   ask:"<b>6 November 1796.</b> Where were you on the night Catherine died and Paul rode in from Gatchina, and what did you do?"}
 ]; }
 function marriageOpts(){

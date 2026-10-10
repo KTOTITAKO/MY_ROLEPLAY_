@@ -160,3 +160,32 @@ The safest place to insert Artemiy is the four-year gap in Paul's children betwe
 - [low] Paul's young great-nephew-in-law, Prince Eugen of Württemberg (born 1788, nephew of Maria Feodorovna), came to St Petersburg in early 1801. Memoir tradition says Paul favoured him so strongly that he was rumoured to plan to adopt him, marry him to a daughter and pass over his own sons. (early 1801 / N.S. early 1801) <https://en.wikipedia.org/wiki/Paul_I_of_Russia>
 - [medium] Paul revised the dynasty's legal framework on the same coronation day, 5 April 1797: alongside the succession act he issued the Statute on the Imperial Family (titles, incomes and appanages of grand dukes and duchesses). (5 April 1797 / N.S. 16 April 1797) <https://www.prlib.ru/en/history/619170>
 - [low] The Act fixed the majority of a sovereign and an heir at 16. It provided that a minor emperor's regent and guardian was the parent, or failing that a person named by the late sovereign. (5 April 1797 / N.S. 16 April 1797) <https://www.russianlegitimist.org/a-throne-which-shall-not>
+
+## Fact-check corrections (adversarial verifiers, 10 Oct 2026)
+
+Most claims came back "unverifiable" only because the verifiers' web access was blocked; none of those were found wrong.
+These were corrected and take precedence over anything above:
+
+- **Act of Succession (5 Apr 1797):** semi-Salic, not strict male-only. Males first; the female line inherits only if every male dynast dies out.
+  The equal-marriage condition was added only in 1820. Majority at 16 for emperor and heir (20 for other dynasts).
+  Regency: first whoever the sovereign named; only failing that the minor's parent; then the nearest adult in line.
+- **Constantine's 1801 remark (Sablukov):** his brother could reign if he liked, but he himself would never accept the throne.
+  "They'd strangle me as they strangled my father" is a later, loosely sourced attribution.
+- **Pahlen's arrest order:** known only from Pahlen's own later account (via Langeron); no order survives. Medium confidence at most.
+- **Maria Feodorovna:** no good evidence she knew of the plot; her night-long refusal to submit points the other way.
+- **Plot chronology:** the real plot formed 1799–1800 (Panin, de Ribas, then Pahlen). The 1797–98 Smolensk circle was separate, crushed 1798.
+- **Re-swearing of the grand dukes on 11 March:** via Procurator-General Obolyaninov; morning or evening is disputed.
+- **Oath on 12 March:** Voronikhin's Kazan Cathedral did not exist yet (begun Aug 1801). Use the old Kazan church on Nevsky or the Winter Palace.
+- **Torture ban:** a separate decree of 27 Sep 1801 O.S., not the 2 Apr 1801 abolition of the Secret Expedition. On 2 Apr Catherine's
+  Charters to the Nobility and to the Towns were also restored.
+- **La Harpe:** stayed about 18 months after the October 1793 conversation and left in spring 1795 amid accusations of Jacobinism.
+  The claim that Diderot was asked first is unsupported (d'Alembert refused to tutor Paul in 1762).
+- **Saltykov:** count only from 1790 (prince 1814).
+- **Arakcheyev:** commandant of St Petersburg on 7 Nov 1796, major-general on 8 Nov. Dismissed Oct 1799, at Gruzino in March 1801.
+- **Duke Eugen of Württemberg:** born 8 Jan 1788 N.S. at Oels (Prussian Silesia, Gregorian) = 28 Dec 1787 O.S. Paul's nephew by marriage.
+- **Constantine's Greek project:** a Greek nurse named Helen and a medal showing Hagia Sophia; the town by Tsarskoye Selo was **Sofia** (1780).
+  "Konstantinogorod" is unattested.
+- **"Tale of Tsarevich Khlor" (1781):** Alexander was three, not five.
+- **Paul's murder, traditional version:** Nikolai Zubov struck the snuffbox blow. Only Platon Zubov and (self-servingly) Bennigsen have
+  "left the room" versions.
+- **Calendar:** add 11 days up to and including 28 Feb 1800 O.S.; add 12 from 29 Feb 1800 O.S. onward.
